@@ -10,6 +10,7 @@ extern void screen_event_font_face(int i);
 extern void screen_event_font_size(double z);
 extern void screen_event_aa(int s);
 extern void screen_event_level(int z);
+extern void screen_event_level_a(int z, double a);
 extern void screen_event_line_width(double w);
 extern void screen_event_line_cap(const char *style);
 extern void screen_event_line_join(const char *style);

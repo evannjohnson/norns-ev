@@ -378,6 +378,10 @@ void screen_level(int z) {
     z = z < 0 ? 0 : (z > 15 ? 15 : z);
     cairo_set_source_rgb(cr, c[z], c[z], c[z]);
 }
+void screen_level_a(int z, double a) {
+    z = z < 0 ? 0 : (z > 15 ? 15 : z);
+    cairo_set_source_rgba(cr, c[z], c[z], c[z], a);
+}
 
 void screen_line_width(double w) {
     cairo_set_line_width(cr, w);

@@ -69,6 +69,8 @@ Screen.clear = function() _norns.screen_clear() end
 -- @tparam number value 0-15 (0=off, 15=white)
 Screen.level = function(value) _norns.screen_level(value) end
 
+Screen.level_a = function(value, a) _norns.screen_level_a(value, a) end
+
 --- set line width.
 -- @tparam number w line width (in pixels, floats permitted)
 Screen.line_width = function(w) _norns.screen_line_width(w) end

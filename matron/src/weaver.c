@@ -106,6 +106,7 @@ static int _screen_brightness(lua_State*l);
 static int _screen_contrast(lua_State*l);
 static int _screen_invert(lua_State *l);
 static int _screen_level(lua_State *l);
+static int _screen_level_a(lua_State *l);
 static int _screen_line_width(lua_State *l);
 static int _screen_line_cap(lua_State *l);
 static int _screen_line_join(lua_State *l);
@@ -480,6 +481,7 @@ void w_init(void) {
     lua_register_norns("screen_contrast", &_screen_contrast);
     lua_register_norns("screen_invert", &_screen_invert);
     lua_register_norns("screen_level", &_screen_level);
+    lua_register_norns("screen_level_a", &_screen_level_a);
     lua_register_norns("screen_line_width", &_screen_line_width);
     lua_register_norns("screen_line_cap", &_screen_line_cap);
     lua_register_norns("screen_line_join", &_screen_line_join);
@@ -785,6 +787,14 @@ int _screen_level(lua_State *l) {
     lua_check_num_args(1);
     int x = (int)luaL_checkinteger(l, 1);
     screen_event_level(x);
+    lua_settop(l, 0);
+    return 0;
+}
+int _screen_level_a(lua_State *l) {
+    lua_check_num_args(2);
+    int x = (int)luaL_checkinteger(l, 1);
+    double a = luaL_checknumber(l, 2);
+    screen_event_level_a(x, a);
     lua_settop(l, 0);
     return 0;
 }

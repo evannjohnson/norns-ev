@@ -120,6 +120,9 @@ void handle_screen_event(struct screen_event_data *ev) {
     case SCREEN_EVENT_LEVEL:
         screen_level(ev->payload.i.i1);
         break;
+    case SCREEN_EVENT_LEVEL_A:
+        screen_level_a(ev->payload.i.i1, ev->payload.d.d1);
+        break;
     case SCREEN_EVENT_LINE_WIDTH:
         screen_line_width(ev->payload.d.d1);
         break;
@@ -297,6 +300,15 @@ void screen_event_level(int z) {
     screen_event_data_init(&ev);
     ev.type = SCREEN_EVENT_LEVEL;
     ev.payload.i.i1 = z;
+    screen_event_data_push(&ev);
+}
+
+void screen_event_level_a(int z, double a) {
+    struct screen_event_data ev;
+    screen_event_data_init(&ev);
+    ev.type = SCREEN_EVENT_LEVEL_A;
+    ev.payload.i.i1 = z;
+    ev.payload.d.d1 = a;
     screen_event_data_push(&ev);
 }
 
