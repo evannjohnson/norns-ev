@@ -225,7 +225,22 @@ function clock.add_params()
       if x==1 then clock.internal.set_tempo(params:get("clock_tempo")) end
     end)
   params:set_save("clock_source", false)
-  params:add_number("clock_tempo", "tempo", 1, 300, norns.state.clock.tempo)
+  -- params:add_number("clock_tempo", "tempo", 1, 300, norns.state.clock.tempo)
+  local clock_tempo_param = {
+    id="clock_tempo",
+    name="tempo",
+    type="control",
+    controlspec=controlspec.def{
+      min = 1,
+      max = 600,
+      warp = 'exp',
+      step = 0.1,
+      default = norns.state.clock.tempo,
+      quantum = 0.2/599,
+      wrap = false
+    },
+  }
+  params:add(clock_tempo_param)
   params:set_action("clock_tempo",
     function(bpm)
       local source = params:string("clock_source")
