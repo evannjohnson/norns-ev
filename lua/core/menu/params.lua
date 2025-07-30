@@ -723,19 +723,21 @@ norns.menu_midi_event = function(data, dev)
       if _menu.mode then _menu.redraw() end
     else
       --print(cc.." : "..v)
-      local r = norns.pmap.rev[dev][ch][cc]
+      local r = norns.pmap.rev[dev][ch][cc] -- r is a param id
       if r then
         local d = norns.pmap.data[r]
         local t = params:t(r)
         if d.accum then
           v = (v > 64) and 1 or -1
+          local vv = v
           d.value = util.clamp(d.value + v, d.in_lo, d.in_hi)
           v = d.value
         end
         local s = util.clamp(v, d.in_lo, d.in_hi)
         s = util.linlin(d.in_lo, d.in_hi, d.out_lo, d.out_hi, s)
         if t == params.tCONTROL or t == params.tTAPER then
-          params:set_raw(r,s)
+          -- params:set_raw(r,s)
+          params:delta(r,vv)
         elseif t == params.tNUMBER or t == params.tOPTION then
           s = util.round(s)
           params:set(r,s)
