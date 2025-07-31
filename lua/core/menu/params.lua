@@ -731,7 +731,7 @@ norns.menu_midi_event = function(data, dev)
         if d.accum then
           v = (v > 64) and 1 or -1
           params:delta(r,vv)
-          goto end_param_set
+          -- goto end_param_set
           d.value = util.clamp(d.value + v, d.in_lo, d.in_hi)
           v = d.value
         end
@@ -754,7 +754,7 @@ norns.menu_midi_event = function(data, dev)
             end
           end
         end
-        ::end_param_set::
+        -- ::end_param_set::
         if _menu.mode then _menu.redraw() end
       end
     end
