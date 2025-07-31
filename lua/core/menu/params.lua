@@ -730,10 +730,11 @@ norns.menu_midi_event = function(data, dev)
         local vv
         if d.accum then
           v = (v > 64) and 1 or -1
-          params:delta(r,vv)
-          -- goto end_param_set
-          d.value = util.clamp(d.value + v, d.in_lo, d.in_hi)
-          v = d.value
+          params:delta(r,v)
+          if _menu.mode then _menu.redraw() end
+          return
+          -- d.value = util.clamp(d.value + v, d.in_lo, d.in_hi)
+          -- v = d.value
         end
         local s = util.clamp(v, d.in_lo, d.in_hi)
         s = util.linlin(d.in_lo, d.in_hi, d.out_lo, d.out_hi, s)
@@ -754,7 +755,6 @@ norns.menu_midi_event = function(data, dev)
             end
           end
         end
-        -- ::end_param_set::
         if _menu.mode then _menu.redraw() end
       end
     end
