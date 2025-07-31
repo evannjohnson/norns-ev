@@ -727,9 +727,10 @@ norns.menu_midi_event = function(data, dev)
       if r then
         local d = norns.pmap.data[r]
         local t = params:t(r)
+        local vv
         if d.accum then
           v = (v > 64) and 1 or -1
-          local vv = v
+          vv = v
           d.value = util.clamp(d.value + v, d.in_lo, d.in_hi)
           v = d.value
         end
