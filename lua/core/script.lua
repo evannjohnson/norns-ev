@@ -112,9 +112,10 @@ Script.clear = function()
   -- add clock menu
   clock.add_params()
   -- re-enable crow clock if needed
-  if params:string("clock_source") == "crow" then
-    crow.input[1].change = function() end
-    crow.input[1].mode("change",2,0.1,"rising")
+  if params.lookup["clock_source"] then
+    if params:string("clock_source") == "crow" then
+      norns.crow.clock_enable()
+    end
   end
 
   -- reset PLAY mode screen settings
